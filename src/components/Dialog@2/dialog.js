@@ -2,7 +2,9 @@ import React from 'react';
 
 import './index.css';
 
-import {DialogContent, DialogHeader, DialogActions} from './index';
+import DialogContent from './DialogContent';
+import DialogHeader from './DialogHeader';
+import DialogActions from './DialogActions';
 
 export default class Dialog extends React.Component {
   static defaultProps = {
@@ -10,9 +12,9 @@ export default class Dialog extends React.Component {
   }
 
   static resolvedComponentNames = [
-    DialogHeader.displayName,
-    DialogContent.displayName,
-    DialogActions.displayName
+    DialogHeader.name,
+    DialogContent.name,
+    DialogActions.name
   ];
 
   dialogRef = (node) => {
@@ -45,8 +47,8 @@ export default class Dialog extends React.Component {
     this.dialog.close();
   }
 
-  getComponentChildren = () => {
-    return React.Children.toArray(this.props.children).reduce(
+  getComponentChildren = () =>
+    React.Children.toArray(this.props.children).reduce(
       (result, element) => {
         if (Dialog.resolvedComponentNames.includes(element.type.name)) {
           result[element.type.name] = element;
@@ -55,14 +57,16 @@ export default class Dialog extends React.Component {
       },
       {}
     )
-  }
 
   render () {
     const {
-      [DialogHeader.displayName]: dialogHeader,
-      [DialogContent.displayName]: dialogContent,
-      [DialogActions.displayName]: dialogActions,
-    } = this.getComponentChildren;
+      [DialogHeader.name]: dialogHeader,
+      [DialogContent.name]: dialogContent,
+      [DialogActions.name]: dialogActions,
+    } = this.getComponentChildren();
+
+    console.log(this.getComponentChildren());
+    console.log(dialogHeader);
 
     return (
       <dialog ref={this.dialogRef}

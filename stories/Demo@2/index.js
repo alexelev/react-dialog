@@ -1,9 +1,9 @@
 import React from 'react';
-import Dialog, {
-  DialogHeader, 
-  DialogContent, 
-  DialogActions
-} from './../../src/components/Dialog@2';
+
+import Dialog from './../../src/components/Dialog@2/dialog';
+import DialogHeader from './../../src/components/Dialog@2/DialogHeader';
+import DialogContent from './../../src/components/Dialog@2/DialogContent';
+import DialogActions from './../../src/components/Dialog@2/DialogActions';
 
 import './index.css';
 
@@ -27,14 +27,21 @@ export default class Demo extends React.Component {
       <div className="container">
         <button onClick={this.openDialog}>Click Me</button>
         <Dialog
-          header="Some header"
-          actionButtons={['Close']}
           open={isDialogOpen}
           onClose={this.closeDialog}
-          isActionsInTop={true}
-          isHeaderInBottom={true}
         >
-          Some content
+          <DialogHeader>
+            <h1>Hello!</h1>
+          </DialogHeader>
+          <DialogContent>
+            <ul>
+              <li>01</li>
+              <li>02</li>
+            </ul>
+          </DialogContent>
+          <DialogActions>
+            <button>Cancel</button>
+          </DialogActions>
         </Dialog>
       </div>
     );
